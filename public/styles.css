@@ -1,0 +1,12 @@
+header {
+    height: 30%;
+    text-align: center;
+    background-color: skyblue;
+    font-size: 3rem;
+    padding: 0.7rem;
+    font-family: "Signika Negative", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    width: 100%;
+}

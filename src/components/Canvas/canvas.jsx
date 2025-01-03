@@ -2,7 +2,7 @@ import React from "react";
 import "./canvas.css";
 
 const canvas = () => {
-  return <div>canvas</div>;
+  return <div>Canvas</div>;
 };
 
 export default canvas;
