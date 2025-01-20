@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -19,13 +20,33 @@ header {
 }
 
 .canvas {
-    flex: 1;
+    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    background-color: red;
+}
+
+.contentBox {
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+#cityName {
+    font-size: 2rem;
+}
+
+#currTemp {
+    font-size: 1.5rem;
+    padding-top: 2rem;
 }
 
 footer {
     width: 100%;
+    height: 7%;
     text-align: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    font-size: 1.2rem;
 }
