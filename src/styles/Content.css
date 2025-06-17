@@ -1,0 +1,42 @@
+.main-container {
+    background-color: #90D5FF;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container img {
+    position: fixed;
+    left: 20px;
+    top: 1vh;
+    z-index: 0;
+}
+
+.middle-container {
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    min-width: 33%;
+    min-height: 55vh;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    font-size: 2rem;
+}
+
+.main-temp {
+    font-size: 4.5rem;
+    padding: 1.5rem 0;
+}
+
+.temp-hour {
+    min-width: 80%;
+    padding-top: 0.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+

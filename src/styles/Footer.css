@@ -1,0 +1,7 @@
+.footer-bar {
+    position: relative;
+    z-index: 1;
+    background-color: #B38000;
+    height: 6.5rem;
+    /* padding: 2rem; */
+}
