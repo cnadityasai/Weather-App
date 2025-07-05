@@ -34,9 +34,18 @@
 
 .temp-hour {
     min-width: 80%;
-    padding-top: 0.4rem;
+    padding-top: 0.7rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.temp-hour-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 100%;
+    padding-top: 1.5rem;
 }
 
