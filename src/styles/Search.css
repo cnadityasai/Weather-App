@@ -1,0 +1,10 @@
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-container > img {
+    width: 1.4rem;
+    padding-left: 0.5rem;
+}

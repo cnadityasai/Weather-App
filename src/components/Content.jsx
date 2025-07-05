@@ -28,8 +28,6 @@ const Content = () => {
         const data = response.data;
         setTemp(data.current.temp_c)
         setWeather(data.current.condition.text)
-        console.log(typeof(hour))
-        console.log(hour)
         for(var i=hour; i<=hour+3; i++){
           const temp = i;
           setForecast(prevArray => [...prevArray, temp])
@@ -71,10 +69,10 @@ const Content = () => {
             <div className='current-weather'>{weather}</div>
             {/* <div className='rain-alert'>Rain expected at 2pm</div> */}
             <div className='temp-hour-container'>
-              <div className='temp-hour'><span>Current</span><b>{hourData ? hourData[forecast[0]].temp_c : "..."}<sup>•</sup></b></div>
-              <div className='temp-hour'><span>{forecast[1]}:00</span><b>{hourData ? hourData[forecast[1]].temp_c: "..."}<sup>•</sup></b></div>
-              <div className='temp-hour'><span>{forecast[2]}:00</span><b>{hourData ? hourData[forecast[1]].temp_c: "..."}<sup>•</sup></b></div>
-              <div className='temp-hour'><span>{forecast[3]}:00</span><b>{hourData ? hourData[forecast[2]].temp_c: "..."}<sup>•</sup></b></div>
+              <div className='temp-hour'><span>Current</span><b>{hourData && hourData[forecast[0]].temp_c ? hourData[forecast[0]].temp_c : "..."}<sup>•</sup></b></div>
+              <div className='temp-hour'><span>{forecast[1]}:00</span><b>{hourData && hourData[forecast[1]].temp_c? hourData[forecast[1]].temp_c: "..."}<sup>•</sup></b></div>
+              <div className='temp-hour'><span>{forecast[2]}:00</span><b>{hourData && hourData[forecast[2]].temp_c? hourData[forecast[2]].temp_c: "..."}<sup>•</sup></b></div>
+              <div className='temp-hour'><span>{forecast[3]}:00</span><b>{hourData && hourData[forecast[3]].temp_c? hourData[forecast[3]].temp_c: "..."}<sup>•</sup></b></div>
             </div>
         </div>
     </div>
