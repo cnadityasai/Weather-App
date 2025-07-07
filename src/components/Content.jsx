@@ -9,7 +9,7 @@ const Content = () => {
   const [weather, setWeather] = useState("");
   const [temp, setTemp] = useState(0);
   const [forecast, setForecast] = useState([]);
-  const [hourData, setHourData] = useState();
+  const [hourData, setHourData] = useState([]);
 
   const hour = parseInt(new Date().toLocaleTimeString("en-GB", {timeZone: 'Europe/London', hour: "2-digit", hour12: false}))
 
@@ -28,10 +28,11 @@ const Content = () => {
         const data = response.data;
         setTemp(data.current.temp_c)
         setWeather(data.current.condition.text)
+        const hours = []
         for(var i=hour; i<=hour+3; i++){
-          const temp = i;
-          setForecast(prevArray => [...prevArray, temp])
+          hours.push(i);
         }
+        setForecast(hours)
       } catch (error) {
         console.error('Error fetching weather: ', error)
       }
@@ -50,7 +51,6 @@ const Content = () => {
         )
         const futureWeather = response1.data;
         setHourData(futureWeather.forecast.forecastday[0].hour)
-        // console.log(londonHour)
 
       } catch (error) {
         console.log("Error fetching future weather: ", error)
@@ -69,10 +69,9 @@ const Content = () => {
             <div className='current-weather'>{weather}</div>
             {/* <div className='rain-alert'>Rain expected at 2pm</div> */}
             <div className='temp-hour-container'>
-              <div className='temp-hour'><span>Current</span><b>{hourData && hourData[forecast[0]].temp_c ? hourData[forecast[0]].temp_c : "..."}<sup>•</sup></b></div>
-              <div className='temp-hour'><span>{forecast[1]}:00</span><b>{hourData && hourData[forecast[1]].temp_c? hourData[forecast[1]].temp_c: "..."}<sup>•</sup></b></div>
-              <div className='temp-hour'><span>{forecast[2]}:00</span><b>{hourData && hourData[forecast[2]].temp_c? hourData[forecast[2]].temp_c: "..."}<sup>•</sup></b></div>
-              <div className='temp-hour'><span>{forecast[3]}:00</span><b>{hourData && hourData[forecast[3]].temp_c? hourData[forecast[3]].temp_c: "..."}<sup>•</sup></b></div>
+              {forecast.map((hourIndex, idx) => (
+                <div className='temp-hour'><span>{idx===0?"Current":hourIndex}</span><b>{hourData.length > 0 && hourData[hourIndex] ? hourData[hourIndex].temp_c : "..."}<sup>•</sup></b></div>
+              ))}
             </div>
         </div>
     </div>

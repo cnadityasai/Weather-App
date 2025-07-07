@@ -17,9 +17,7 @@ const Search = ({query, setQuery, onClose}) => {
         const filtered = data.filter((item) => 
             item.toLowerCase().startsWith(query.toLowerCase())
         )
-
         setSuggestions(filtered)
-
     }
   return (
     <div className='search-container'>
