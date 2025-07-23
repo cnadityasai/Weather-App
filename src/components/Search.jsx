@@ -19,6 +19,11 @@ const Search = ({query, setQuery, onClose}) => {
         )
         setSuggestions(filtered)
     }
+
+    function handleSuggestionClick(item) {
+        setQuery(item);
+        setSuggestions([])
+    }
   return (
     <div className='search-container'>
         <input 
@@ -32,7 +37,7 @@ const Search = ({query, setQuery, onClose}) => {
             suggestions.length > 0 && (
                 <ul className="suggestions">
                     {suggestions.map((item, index) => (
-                        <li key={index}>{item}</li>
+                        <li key={index} onClick={() =>handleSuggestionClick(item)}>{item}</li>
                     ))}
                 </ul>
             )
