@@ -22,6 +22,7 @@ const Search = ({query, setQuery, onClose}) => {
   return (
     <div className='search-container'>
         <input 
+            className='search-box'
             type='text' 
             placeholder='Enter Location' 
             value={query} 

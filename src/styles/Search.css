@@ -1,4 +1,5 @@
 .search-container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,4 +8,12 @@
 .search-container > img {
     width: 1.4rem;
     padding-left: 0.5rem;
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    width: 80%;
+    background: white;
+    z-index: 1000;
 }

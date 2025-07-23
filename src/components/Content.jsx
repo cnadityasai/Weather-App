@@ -70,7 +70,7 @@ const Content = () => {
             {/* <div className='rain-alert'>Rain expected at 2pm</div> */}
             <div className='temp-hour-container'>
               {forecast.map((hourIndex, idx) => (
-                <div className='temp-hour'><span>{idx===0?"Current":hourIndex}</span><b>{hourData.length > 0 && hourData[hourIndex] ? hourData[hourIndex].temp_c : "..."}<sup>•</sup></b></div>
+                <div className='temp-hour'><span>{idx===0?"Current":hourIndex + ":00"}</span><b>{hourData.length > 0 && hourData[hourIndex] ? hourData[hourIndex].temp_c : "..."}<sup>•</sup></b></div>
               ))}
             </div>
         </div>
