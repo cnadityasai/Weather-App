@@ -3,7 +3,7 @@ import axios from 'axios';
 import "../styles/Content.css";
 import SunIcon from '../assets/sun.png';
 
-const Content = () => {
+const Content = ({selectedCity}) => {
 
   const [city, setCity] = useState("London");
   const [weather, setWeather] = useState("");
@@ -13,53 +13,63 @@ const Content = () => {
 
   const hour = parseInt(new Date().toLocaleTimeString("en-GB", {timeZone: 'Europe/London', hour: "2-digit", hour12: false}))
 
-  useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        const response = await axios.get(
-          'http://api.weatherapi.com/v1/current.json',
-          {
-            params: {
-              key: '529ba33930584163887165234251806',
-              q: city
-            }
+  const fetchWeather = async (cityName) => {
+    try {
+      const response = await axios.get(
+        'http://api.weatherapi.com/v1/current.json',
+        {
+          params: {
+            key: '529ba33930584163887165234251806',
+            q: cityName
           }
-        )
-        const data = response.data;
-        setTemp(data.current.temp_c)
-        setWeather(data.current.condition.text)
-        const hours = []
-        for(var i=hour; i<=hour+3; i++){
-          hours.push(i);
         }
-        setForecast(hours)
-      } catch (error) {
-        console.error('Error fetching weather: ', error)
+      )
+      const data = response.data;
+      setTemp(data.current.temp_c)
+      setWeather(data.current.condition.text)
+      const hours = []
+      for(var i=hour; i<=hour+3; i++){
+        hours.push(i);
       }
-    };
-
-    const fetchFutureWeather = async () => {
-      try {
-        const response1 = await axios.get(
-          'http://api.weatherapi.com/v1/forecast.json',
-          {
-            params: {
-              key: '529ba33930584163887165234251806',
-              q: city
-            }
-          }
-        )
-        const futureWeather = response1.data;
-        setHourData(futureWeather.forecast.forecastday[0].hour)
-
-      } catch (error) {
-        console.log("Error fetching future weather: ", error)
-      }
+      setForecast(hours)
+    } catch (error) {
+      console.error('Error fetching weather: ', error)
     }
+  };
 
-    fetchWeather();
-    fetchFutureWeather();
+  const fetchFutureWeather = async (cityName) => {
+    try {
+      const response1 = await axios.get(
+        'http://api.weatherapi.com/v1/forecast.json',
+        {
+          params: {
+            key: '529ba33930584163887165234251806',
+            q: cityName
+          }
+        }
+      )
+      const futureWeather = response1.data;
+      setHourData(futureWeather.forecast.forecastday[0].hour)
+
+    } catch (error) {
+      console.log("Error fetching future weather: ", error)
+    }
+  }
+
+  useEffect(() => {
+    fetchWeather(city);
+    fetchFutureWeather(city);
   }, []);
+
+  useEffect(() => {
+    if(selectedCity !== ''){
+      setCity(selectedCity);
+      fetchWeather(selectedCity);
+      fetchFutureWeather(selectedCity);
+    }
+    console.log(city)
+  },[selectedCity])
+
 
   return (
     <div className='main-container'>

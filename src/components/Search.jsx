@@ -5,6 +5,7 @@ import '../styles/Search.css'
 const Search = ({query, setQuery, onClose}) => {
 
     const [suggestions, setSuggestions] = useState([])
+    const [city, setCity] = useState('');
 
     const data = [
         "London", "Chennai", "New York", "Seattle", "Bangalore",
@@ -12,10 +13,10 @@ const Search = ({query, setQuery, onClose}) => {
     ]
 
     function handleChange(e) {
-        setQuery(e.target.value)
+        setCity(e.target.value)
 
         const filtered = data.filter((item) => 
-            item.toLowerCase().startsWith(query.toLowerCase())
+            item.toLowerCase().startsWith(city.toLowerCase())
         )
         setSuggestions(filtered)
     }
@@ -23,6 +24,7 @@ const Search = ({query, setQuery, onClose}) => {
     function handleSuggestionClick(item) {
         setQuery(item);
         setSuggestions([])
+        onClose();
     }
   return (
     <div className='search-container'>
@@ -30,7 +32,7 @@ const Search = ({query, setQuery, onClose}) => {
             className='search-box'
             type='text' 
             placeholder='Enter Location' 
-            value={query} 
+            value={city} 
             onChange={handleChange} 
         />
         {
