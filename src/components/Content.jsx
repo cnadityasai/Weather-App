@@ -12,6 +12,7 @@ const Content = ({selectedCity}) => {
   const [forecast, setForecast] = useState([]);
   const [hourData, setHourData] = useState([]);
   const [icon, setIcon] = useState(SunIcon);
+  const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
   const hour = parseInt(new Date().toLocaleTimeString("en-GB", {timeZone: 'Europe/London', hour: "2-digit", hour12: false}))
 
@@ -21,7 +22,7 @@ const Content = ({selectedCity}) => {
         'http://api.weatherapi.com/v1/current.json',
         {
           params: {
-            key: '529ba33930584163887165234251806',
+            key: apiKey,
             q: cityName
           }
         }
@@ -46,7 +47,7 @@ const Content = ({selectedCity}) => {
         'http://api.weatherapi.com/v1/forecast.json',
         {
           params: {
-            key: '529ba33930584163887165234251806',
+            key: apiKey,
             q: cityName
           }
         }
