@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "../styles/Content.css";
 import SunIcon from '../assets/sun.png';
+import CloudIcon from '../assets/cloud.png'
 
 const Content = ({selectedCity}) => {
 
@@ -10,6 +11,7 @@ const Content = ({selectedCity}) => {
   const [temp, setTemp] = useState(0);
   const [forecast, setForecast] = useState([]);
   const [hourData, setHourData] = useState([]);
+  const [icon, setIcon] = useState(SunIcon);
 
   const hour = parseInt(new Date().toLocaleTimeString("en-GB", {timeZone: 'Europe/London', hour: "2-digit", hour12: false}))
 
@@ -32,6 +34,7 @@ const Content = ({selectedCity}) => {
         hours.push(i);
       }
       setForecast(hours)
+      updateIcon()
     } catch (error) {
       console.error('Error fetching weather: ', error)
     }
@@ -56,6 +59,14 @@ const Content = ({selectedCity}) => {
     }
   }
 
+  function updateIcon(){
+    if(weather.toLowerCase().includes("cloudy")){
+      setIcon(CloudIcon);
+    } else {
+      setIcon(SunIcon)
+    }
+  }
+
   useEffect(() => {
     fetchWeather(city);
     fetchFutureWeather(city);
@@ -70,10 +81,14 @@ const Content = ({selectedCity}) => {
     console.log(city)
   },[selectedCity])
 
+  useEffect(() => {
+    updateIcon();
+  }, [weather])
+
 
   return (
     <div className='main-container'>
-        <img src={SunIcon} alt='Sun Icon'></img>
+        <img src={icon} alt='Sun Icon'></img>
         <div className='middle-container'>
             <div className='main-temp'><b>{temp}<sup>•</sup></b>C {city}</div>            
             <div className='current-weather'>{weather}</div>
