@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import Close from '../assets/close.png';
 import '../styles/Search.css'
 
@@ -6,19 +7,47 @@ const Search = ({query, setQuery, onClose}) => {
 
     const [suggestions, setSuggestions] = useState([])
     const [city, setCity] = useState('');
+    const [debouncedQuery, setDebouncedQuery] = useState('');
+    const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
     const data = [
         "London", "Chennai", "New York", "Seattle", "Bangalore",
         "Ernakulam", "Hyderabad", "Mumbai", "Delhi", "New Delhi"
     ]
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedQuery(city);
+        }, 400)
+
+        return () => clearTimeout(timer);
+    }, [city]);
+
+    useEffect(() => {
+        if(debouncedQuery.length < 2) return; 
+
+        const fetchSuggestions = async () => {
+            try{
+                const response = await axios.get(
+                    'https://api.weatherapi.com/v1/search.json',
+                    {
+                        params: {
+                            key: apiKey,
+                            q: debouncedQuery
+                        }
+                    }
+                )
+                setSuggestions(response.data.map((item) => item.name));
+            } catch (error) {
+                console.error('Failed to fetch city suggestions', error);
+                setSuggestions([]);
+            }
+        }
+        fetchSuggestions();
+    }, [debouncedQuery])
+
     function handleChange(e) {
         setCity(e.target.value)
-
-        const filtered = data.filter((item) => 
-            item.toLowerCase().startsWith(city.toLowerCase())
-        )
-        setSuggestions(filtered)
     }
 
     function handleSuggestionClick(item) {
