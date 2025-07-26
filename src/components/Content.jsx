@@ -19,7 +19,7 @@ const Content = ({selectedCity}) => {
   const fetchWeather = async (cityName) => {
     try {
       const response = await axios.get(
-        'http://api.weatherapi.com/v1/current.json',
+        'https://api.weatherapi.com/v1/current.json',
         {
           params: {
             key: apiKey,
@@ -44,7 +44,7 @@ const Content = ({selectedCity}) => {
   const fetchFutureWeather = async (cityName) => {
     try {
       const response1 = await axios.get(
-        'http://api.weatherapi.com/v1/forecast.json',
+        'https://api.weatherapi.com/v1/forecast.json',
         {
           params: {
             key: apiKey,
